@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from consturction.models import OldConstruction
+from oldConsturction.models import OldConstruction
 
 class OldConstructionSerializer(serializers.ModelSerializer):
 	class Meta:

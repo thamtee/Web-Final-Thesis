@@ -20,8 +20,6 @@ from django.contrib.auth.models import User
 # from rest_framework import routers, serializers, viewsets
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from construction import view
-
 # Serializers define the API repesentation.
 # class UserSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
@@ -42,10 +40,7 @@ from construction import view
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	# url(r'^', include(routers.urls)),
-	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
-	url(r'^oldconstruction/$', view.OldConstructionList.as_view()),
-	url(r'^oldconstruction/(?P<pk>[0-9]+)/$', view.OldConstructionDetail.as_view()),    
+	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),    
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

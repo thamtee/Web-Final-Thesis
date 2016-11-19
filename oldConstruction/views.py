@@ -1,5 +1,6 @@
-from constrution.models import OldConstruction
-from constrution.serializer import OldConstructionSerializer
+from django.shortcuts import render
+from oldConstrution.models import OldConstruction
+from oldConstrution.serializer import OldConstructionSerializer
 
 from rest_framework import generics
 from django.contrib.auth.models import User

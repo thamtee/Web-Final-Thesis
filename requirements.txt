@@ -1,4 +1,4 @@
-django==1.10.3
-djangorestframework
-pygments
-httpie
+django == 1.10.3
+djangorestframework == 3.5.3
+pygments == 2.1.3
+httpie == 0.9.6

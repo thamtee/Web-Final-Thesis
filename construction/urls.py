@@ -19,7 +19,6 @@ from django.contrib.auth.models import User
 
 # from rest_framework import routers, serializers, viewsets
 from rest_framework.urlpatterns import format_suffix_patterns
-
 # Serializers define the API repesentation.
 # class UserSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
@@ -39,8 +38,11 @@ from rest_framework.urlpatterns import format_suffix_patterns
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
-	# url(r'^', include(routers.urls)),
-	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),    
+	url(r'^', include('reportConstruction.urls')), 
+]
+
+urlpatterns += [
+	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

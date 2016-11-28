@@ -58,39 +58,39 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'rest_framework',
-    'django_stormpath',
+    # 'django_stormpath',
 
     'construction',
     'reportConstruction',
 ]
 
 # Stormpath Setting
-AUTHENTICATION_BACKENDS = (
-    'django_stormpath.backends.StormpathBackend',    
-    'django_stormpath.backends.StormpathIdSiteBackend',
-    'django_stormpath.backends.Stormpath.SocialBackend',
-)
+# AUTHENTICATION_BACKENDS = (
+#     'django_stormpath.backends.StormpathBackend',    
+#     'django_stormpath.backends.StormpathIdSiteBackend',
+#     'django_stormpath.backends.Stormpath.SocialBackend',
+# )
 
-AUTH_USER_MODEL = 'django_stormpath.StormpathUser'
+# # AUTH_USER_MODEL = 'django_stormpath.StormpathUser'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+#     ]
+# }
 
-STORMPATH_ID = '6GTHPSFNUBSADHYYEECCE3OQX'
-STORMPATH_SECRET = 'qN+it57grKYMnQtNotumvofvnv+pk28VCsR5hUb5rRo'
-STORMPATH_APPLICATION = 'https://api.stormpath.com/v1/applications/3Fs7hhRZf62m6xjFy80K1e'
+# STORMPATH_ID = '6GTHPSFNUBSADHYYEECCE3OQX'
+# STORMPATH_SECRET = 'qN+it57grKYMnQtNotumvofvnv+pk28VCsR5hUb5rRo'
+# STORMPATH_APPLICATION = 'https://api.stormpath.com/v1/applications/3Fs7hhRZf62m6xjFy80K1e'
 
-STORMPATH_ENABLE_FACEBOOK = True
+# STORMPATH_ENABLE_FACEBOOK = True
 
-STORMPATH_SOCIAL = {
-    'FACEBOOK': {
-        'client_id': os.environ['1346565105353812'],
-        'client_secret': os.environ['222c1b18e8fb79b77d530b7a12b9a95f']
-    },
-}
+# STORMPATH_SOCIAL = {
+#     'FACEBOOK': {
+#         'client_id': os.environ['1346565105353812'],
+#         'client_secret': os.environ['222c1b18e8fb79b77d530b7a12b9a95f']
+#     },
+# }
 
 # END STORMPATH SETTING
 

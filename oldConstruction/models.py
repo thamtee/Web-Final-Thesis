@@ -11,6 +11,8 @@ class OldConstruction(models.Model):
 	duration = models.CharField(max_length=20, default='')
 	budgets = models.IntegerField(default=0)
 	engineerName = models.CharField(max_length=30, blank=True, default='')
+	category = models.CharField(max_length=30, default='')
+	viewMap = models.BooleanField(default=False)
 
 	#MARK: Address
 

@@ -47,7 +47,7 @@
 			{% endif %}
 
 			for (var i = 0; i<=latitudeList.length; ++i){
-				pin.push({lat: latitudeList[i], lag: longitudeList[i]});
+				pin.push({lat: Math.floor(latitudeList[i]), lng: Math.floor(longitudeList[i])});
 			}
 
 			map = new google.maps.Map(document.getElementById('map'), {

@@ -23,9 +23,18 @@
     <script>
       var map;
       function initMap() {
+      	var nu = {lat: 16.7423, lng: 100.193};
+
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 16.7423, lng: 100.193},
-          zoom: 8
+          center: nu,
+          zoom: 10
+        });
+
+        var marker = new google.maps.Marker({
+        	position: nu,
+        	map: map,
+        	icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        	// title: 'Testing'
         });
       }
     </script>

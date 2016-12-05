@@ -116,6 +116,7 @@ DATABASES = {
     }
 }
 
+DATABASES[‘default’] = dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -164,3 +165,5 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
  
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+SECURE_PROXY_SSL_HEADER = (‘HTTP_X_FORWARDED_PROTO’, ‘https’)

@@ -31,4 +31,7 @@ class ReportConstructionDetail(generics.RetrieveUpdateDestroyAPIView):
 # class UserDetail(generics.RetrieveAPIView):
 # 	queryset = User.objects.all()
 # 	serializer_class = UserSerializer
+
+def map_api(request):
+	return render(request, 'construction/map_api.html', {})
 		

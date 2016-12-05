@@ -7,4 +7,4 @@ class OldConstructionSerializer(serializers.ModelSerializer):
 		model = OldConstruction
 		fields = ('id', 'name', 'companyName', 'contractNumber', 'endDate', 'startDate', 'duration',
 				  'budgets', 'engineerName', 'province', 'district', 'subDistrict', 'villageNo',
-				  'street', 'etc', 'latitude', 'longitude')
+				  'street', 'etc', 'latitude', 'longitude', 'category', 'viewMap')

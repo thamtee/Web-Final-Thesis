@@ -7,6 +7,11 @@ from rest_framework import permissions
 
 from django.contrib.auth.models import User
 from django.shortcuts import render
+from django.http import HttpResponse
+from django.template import loader
+
+from .models import ReportConstruction
+from oldConstruction.models import OldConstruction
 
 # Create your views here.
 
@@ -33,5 +38,16 @@ class ReportConstructionDetail(generics.RetrieveUpdateDestroyAPIView):
 # 	serializer_class = UserSerializer
 
 def map_api(request):
-	return render(request, 'construction/map_api.html', {})
+	report_construction_list = ReportConstruction.objects.filter(viewMap = True).values()
+	old_construction_list = OldConstruction.objects.filter(viewMap = True).values()
+
+	context = {
+				'report_construction_list': report_construction_list,
+				'old_construction_list': old_construction_list
+				}
+
+	return render(request, 'construction/map_api.html', context)
+
+def google_varification(request):
+	return render(request, 'construction/google86d8366632dc663e.html', {})
 		

@@ -1,44 +1,69 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Report Construction Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+	<title>Report Construction Map</title>
+	<meta name="viewport" content="initial-scale=1.0">
+	<meta charset="utf-8">
+	<style>
+	  /* Always set the map height explicitly to define the size of the div
+	   * element that contains the map. */
+	  #map {
+		height: 100%;
+	  }
+	  /* Optional: Makes the sample page fill the window. */
+	  html, body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	  }
+	</style>
   </head>
   <body>
-    <div id="map"></div>
-    <script>
-      var map;
-      function initMap() {
-      	var nu = {lat: 16.7423, lng: 100.193};
+	<div id="map"></div>
+	<script>
+	  var map;
+	  function initMap() {
+		var nu = {lat: 16.7423, lng: 100.193};
+		var	location = [];
+		var	marker = [];
+		var	latitudeList = [];
+		var	longitudeList = [];
+		var	labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: nu,
-          zoom: 10
-        });
+		// {% if report_construction_list %}
+		// 	{% for construction in report_construction_list %}
+		// 		latitudeList.push({{ construction.latitude }});
+		// 		longitudeList.push({{ construction.longitude }});
+		// 	{% endfor %}
+		// {% else %}
+		// {% endif %}
 
-        var marker = new google.maps.Marker({
-        	position: nu,
-        	map: map,
-        	icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-        	// title: 'Testing'
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3tjU_pz2vyqRwh9-HVkVe2MrG4o01Ws0&callback=initMap"
-    async defer></script>
+		// {% if old_construction_list %}
+		// 	{% for construction in old_construction_list %}
+		// 		latitudeList.push({{ construction.latitude }});
+		// 		longitudeList.push({{ construction.longitude }});
+		// 	{% endfor %}
+		// {% else %}
+		// {% endif %}
+
+		// for (var i = 0; i<=latitudeList.length; ++i){
+		// 	location.push({lat: latitudeList[i], lag: longitude[i]});
+		// }
+
+		map = new google.maps.Map(document.getElementById('map'), {
+		  center: nu,
+		  zoom: 10
+		});
+
+		// var markers = locations.map(function(location, i) {
+  //         return new google.maps.Marker({
+  //           position: location,
+  //           label: labels[i % labels.length]
+  //         });
+  //       });
+	  }
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3tjU_pz2vyqRwh9-HVkVe2MrG4o01Ws0&callback=initMap"
+	async defer></script>
   </body>
 </html>

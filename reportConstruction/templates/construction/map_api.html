@@ -47,9 +47,9 @@
 			{% endif %}
 
 			for (var i = 0; i<latitudeList.length; ++i){
-				pin.push({lat: Math.floor(latitudeList[i]), lng: Math.floor(longitudeList[i])});
-				console.log(Math.floor(latitudeList[i]));
-				console.log(Math.floor(longitudeList[i]));
+				pin.push({lat: parseFloat(latitudeList[i]), lng: parseFloat(longitudeList[i])});
+				console.log(parseFloat(latitudeList[i]));
+				console.log(parseFloat(longitudeList[i]));
 			}
 			console.log(pin);
 			map = new google.maps.Map(document.getElementById('map'), {
@@ -58,13 +58,18 @@
 			});
 
 			var markers = pin.map(function(location, i) {
+				console.log(location);
 				return new google.maps.Marker({
 					position: location,
 					label: labels[i % labels.length]
 			 	});
 			});
+			var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 		}
 	</script>
+	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3tjU_pz2vyqRwh9-HVkVe2MrG4o01Ws0&callback=initMap"
 	async defer></script>
   </body>

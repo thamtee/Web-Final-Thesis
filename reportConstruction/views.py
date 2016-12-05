@@ -38,8 +38,8 @@ class ReportConstructionDetail(generics.RetrieveUpdateDestroyAPIView):
 # 	serializer_class = UserSerializer
 
 def map_api(request):
-	report_construction_list = ReportConstruction.objects.filter(viewMap = True).values()
-	old_construction_list = OldConstruction.objects.filter(viewMap = True).values()
+	report_construction_list = ReportConstruction.objects.filter(viewMap = True)
+	old_construction_list = OldConstruction.objects.filter(viewMap = True)
 
 	context = {
 				'report_construction_list': report_construction_list,

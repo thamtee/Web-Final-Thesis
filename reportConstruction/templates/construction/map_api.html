@@ -46,10 +46,12 @@
 			{% else %}
 			{% endif %}
 
-			for (var i = 0; i<=latitudeList.length; ++i){
+			for (var i = 0; i<latitudeList.length; ++i){
 				pin.push({lat: Math.floor(latitudeList[i]), lng: Math.floor(longitudeList[i])});
+				console.log(Math.floor(latitudeList[i]));
+				console.log(Math.floor(longitudeList[i]));
 			}
-
+			console.log(pin);
 			map = new google.maps.Map(document.getElementById('map'), {
 				center: nu,
 				zoom: 10

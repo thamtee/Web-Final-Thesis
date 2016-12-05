@@ -104,19 +104,21 @@ WSGI_APPLICATION = 'construction.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+db_from_env = dj_database_url.config(conn_max_age=500)
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'construction',
-        'USER': 'admin',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'd9d4hrha8t0dtn',
+        'USER': 'nyeezowlfeyzbf',
+        'PASSWORD': 'ZRyhWOXv786WE9TJosxS2wbWuS',
+        'HOST': 'ec2-54-243-185-185.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
-DATABASES['default'] = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+# DATABASES['default'] = dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

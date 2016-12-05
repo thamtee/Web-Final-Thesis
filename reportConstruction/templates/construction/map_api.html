@@ -30,37 +30,37 @@
 		var	longitudeList = [];
 		var	labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-		// {% if report_construction_list %}
-		// 	{% for construction in report_construction_list %}
-		// 		latitudeList.push({{ construction.latitude }});
-		// 		longitudeList.push({{ construction.longitude }});
-		// 	{% endfor %}
-		// {% else %}
-		// {% endif %}
+		{% if report_construction_list %}
+			{% for construction in report_construction_list %}
+				latitudeList.push({{ construction.latitude }});
+				longitudeList.push({{ construction.longitude }});
+			{% endfor %}
+		{% else %}
+		{% endif %}
 
-		// {% if old_construction_list %}
-		// 	{% for construction in old_construction_list %}
-		// 		latitudeList.push({{ construction.latitude }});
-		// 		longitudeList.push({{ construction.longitude }});
-		// 	{% endfor %}
-		// {% else %}
-		// {% endif %}
+		{% if old_construction_list %}
+			{% for construction in old_construction_list %}
+				latitudeList.push({{ construction.latitude }});
+				longitudeList.push({{ construction.longitude }});
+			{% endfor %}
+		{% else %}
+		{% endif %}
 
-		// for (var i = 0; i<=latitudeList.length; ++i){
-		// 	location.push({lat: latitudeList[i], lag: longitude[i]});
-		// }
+		for (var i = 0; i<=latitudeList.length; ++i){
+			location.push({lat: latitudeList[i], lag: longitude[i]});
+		}
 
 		map = new google.maps.Map(document.getElementById('map'), {
 		  center: nu,
 		  zoom: 10
 		});
 
-		// var markers = locations.map(function(location, i) {
-  //         return new google.maps.Marker({
-  //           position: location,
-  //           label: labels[i % labels.length]
-  //         });
-  //       });
+		var markers = locations.map(function(location, i) {
+		  return new google.maps.Marker({
+			position: location,
+			label: labels[i % labels.length]
+		  });
+		});
 	  }
 	</script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3tjU_pz2vyqRwh9-HVkVe2MrG4o01Ws0&callback=initMap"

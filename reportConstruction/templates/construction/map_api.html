@@ -37,13 +37,13 @@
 					<img alt="Brand" src="http://maps.google.com/mapfiles/ms/icons/red-dot.png">
 				</a>
 			  <p class="navbar-text">สถานะละทิ้งงานก้อสร้าง</p>
-			  	<a class="navbar-form navbar-nav" href="#">
-			  		<img alt="Brand" src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png">
-			  	</a>
+				<a class="navbar-form navbar-nav" href="#">
+					<img alt="Brand" src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png">
+				</a>
 			  <p class="navbar-text">สถานะกำลังดำเนินงาน</p>
-			  	<a class="navbar-form navbar-nav" href="#">
-			  		<img alt="Brand" src="http://maps.google.com/mapfiles/ms/icons/green-dot.png">
-			  	</a>
+				<a class="navbar-form navbar-nav" href="#">
+					<img alt="Brand" src="http://maps.google.com/mapfiles/ms/icons/green-dot.png">
+				</a>
 			  <p class="navbar-text">สถานะเสร็จสิ้นการดำเนินงาน</p>
 		  </div>
 		  <ul class="nav navbar-nav navbar-right">
@@ -63,54 +63,60 @@
 
 			{% if report_working_list %}
 				{% for construction in report_working_list %}
+				var name = '{{ construction.name }}';
 				var latF = parseFloat({{ construction.latitude }});
 				var lngF = parseFloat({{ construction.longitude }});
-				pinWorking.push({lat: latF, lng: lngF});
+				pinWorking.push({name, latF, lngF});
 				{% endfor %}
 			{% else %}
 			{% endif %}
 
 			{% if old_working_list %}
 				{% for construction in old_working_list %}
+				var name = '{{ construction.name }}';
 				var latF = parseFloat({{ construction.latitude }});
 				var lngF = parseFloat({{ construction.longitude }});
-				pinWorking.push({lat: latF, lng: lngF});
+				pinWorking.push({name, latF, lngF});
 				{% endfor %}
 			{% else %}
 			{% endif %}
 
 			{% if report_finish_list %}
 				{% for construction in report_working_list %}
+				var name = '{{ construction.name }}';
 				var latF = parseFloat({{ construction.latitude }});
 				var lngF = parseFloat({{ construction.longitude }});
-				pinFinish.push({lat: latF, lng: lngF});
+				pinFinish.push({name, latF, lngF});
 				{% endfor %}
 			{% else %}
 			{% endif %}
 
 			{% if old_finish_list %}
 				{% for construction in old_working_list %}
+				var name = '{{ construction.name }}';
 				var latF = parseFloat({{ construction.latitude }});
 				var lngF = parseFloat({{ construction.longitude }});
-				pinFinish.push({lat: latF, lng: lngF});
+				pinFinish.push({name, latF, lngF});
 				{% endfor %}
 			{% else %}
 			{% endif %}
 
 			{% if report_leave_list %}
 				{% for construction in report_working_list %}
+				var name = '{{ construction.name }}';
 				var latF = parseFloat({{ construction.latitude }});
 				var lngF = parseFloat({{ construction.longitude }});
-				pinLeave.push({lat: latF, lng: lngF});
+				pinLeave.push({name, latF, lngF});
 				{% endfor %}
 			{% else %}
 			{% endif %}
 
 			{% if old_leave_list %}
 				{% for construction in old_working_list %}
+				var name = '{{ construction.name }}';
 				var latF = parseFloat({{ construction.latitude }});
 				var lngF = parseFloat({{ construction.longitude }});
-				pinLeave.push({lat: latF, lng: lngF});
+				pinLeave.push({name, latF, lngF});
 				{% endfor %}
 			{% else %}
 			{% endif %}
@@ -120,33 +126,49 @@
 				zoom: 10
 			});
 
-			var markerWorking = pinWorking.map(function(location, i) {
-				console.log(location);
-				return new google.maps.Marker({
-					position: location,
-					icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-				});
-			});
-			var markerFinish = pinFinish.map(function(location, i) {
-				console.log(location);
-				return new google.maps.Marker({
-					position: location,
-					icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-				});
-			});
-			var markerLeave = pinLeave.map(function(location, i) {
-				console.log(location);
-				return new google.maps.Marker({
-					position: location,
-					icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-				});
-			});
-			var markerClusterWorking = new MarkerClusterer(map, markerWorking,
-			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m2.png'});
-			var markerClusterFinish = new MarkerClusterer(map, markerFinish,
-			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png'});
-			var markerClusterLeave = new MarkerClusterer(map, markerLeave,
-			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m3.png'});
+			var marker, i;
+
+			for (i = 0; i < pinWorking.length; i++) {  
+			  marker = new google.maps.Marker({
+				position: new google.maps.LatLng(pinWorking[i][1], pinWorking[i][2]),
+				icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+			  });
+
+			  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+				return function() {
+				  infowindow.setContent(pinWorking[i][0]);
+				  infowindow.open(map, marker);
+				}
+			  })(marker, i));
+			}
+			for (i = 0; i < pinFinish.length; i++) {  
+			  marker = new google.maps.Marker({
+				position: new google.maps.LatLng(pinFinish[i][1], pinFinish[i][2]),
+				icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+			  });
+			  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+				return function() {
+				  infowindow.setContent(pinFinish[i][0]);
+				  infowindow.open(map, marker);
+				}
+			  })(marker, i));
+			}
+			for (i = 0; i < pinLeave.length; i++) {  
+			  marker = new google.maps.Marker({
+				position: new google.maps.LatLng(pinLeave[i][1], pinLeave[i][2]),
+				icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+			  });
+			  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+				return function() {
+				  infowindow.setContent(pinLeave[i][0]);
+				  infowindow.open(map, marker);
+				}
+			  })(marker, i));
+			}
+
+			var markerCluster = new MarkerClusterer(map, marker,
+			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
 		}
 	</script>
 	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">

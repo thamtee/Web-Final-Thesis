@@ -126,7 +126,7 @@
 				zoom: 10
 			});
 
-			var marker, i;
+			var marker, i, markerF, markerL;
 
 			var infowindow = new google.maps.InfoWindow();
 
@@ -144,37 +144,36 @@
 			  })(marker, i));
 			}
 			for (i = 0; i < pinFinish.length; i++) {  
-			  marker = new google.maps.Marker({
+			  markerF = new google.maps.Marker({
 				position: new google.maps.LatLng(pinFinish[i][1], pinFinish[i][2]),
 				icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
 			  });
-			  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			  google.maps.event.addListener(markerF, 'click', (function(markerF, i) {
 				return function() {
 				  infowindow.setContent(pinFinish[i][0]);
-				  infowindow.open(map, marker);
+				  infowindow.open(map, markerF);
 				}
-			  })(marker, i));
+			  })(markerF, i));
 			}
 			for (i = 0; i < pinLeave.length; i++) {  
-			  marker = new google.maps.Marker({
+			  markerL = new google.maps.Marker({
 				position: new google.maps.LatLng(pinLeave[i][1], pinLeave[i][2]),
 				icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
 			  });
-			  google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			  google.maps.event.addListener(markerL, 'click', (function(markerL, i) {
 				return function() {
 				  infowindow.setContent(pinLeave[i][0]);
-				  infowindow.open(map, marker);
+				  infowindow.open(map, markerL);
 				}
-			  })(marker, i));
+			  })(markerL, i));
 			}
 
 			var markerCluster = new MarkerClusterer(map, marker,
 			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
 		}
 	</script>
 	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-	</script>
+    </script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3tjU_pz2vyqRwh9-HVkVe2MrG4o01Ws0&callback=initMap"
 	async defer></script>
   </body>

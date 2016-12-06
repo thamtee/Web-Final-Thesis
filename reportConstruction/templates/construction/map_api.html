@@ -82,40 +82,40 @@
 			{% endif %}
 
 			{% if report_finish_list %}
-				{% for construction in report_working_list %}
-				var name = '{{ construction.name }}';
-				var latF = parseFloat({{ construction.latitude }});
-				var lngF = parseFloat({{ construction.longitude }});
+				{% for constructionF in report_working_list %}
+				var name = '{{ constructionF.name }}';
+				var latF = parseFloat({{ constructionF.latitude }});
+				var lngF = parseFloat({{ constructionF.longitude }});
 				pinFinish.push([name, latF, lngF]);
 				{% endfor %}
 			{% else %}
 			{% endif %}
 
 			{% if old_finish_list %}
-				{% for construction in old_working_list %}
-				var name = '{{ construction.name }}';
-				var latF = parseFloat({{ construction.latitude }});
-				var lngF = parseFloat({{ construction.longitude }});
+				{% for constructionF in old_working_list %}
+				var name = '{{ constructionF.name }}';
+				var latF = parseFloat({{ constructionF.latitude }});
+				var lngF = parseFloat({{ constructionF.longitude }});
 				pinFinish.push([name, latF, lngF]);
 				{% endfor %}
 			{% else %}
 			{% endif %}
 
 			{% if report_leave_list %}
-				{% for construction in report_working_list %}
-				var name = '{{ construction.name }}';
-				var latF = parseFloat({{ construction.latitude }});
-				var lngF = parseFloat({{ construction.longitude }});
+				{% for constructionL in report_working_list %}
+				var name = '{{ constructionL.name }}';
+				var latF = parseFloat({{ constructionL.latitude }});
+				var lngF = parseFloat({{ constructionL.longitude }});
 				pinLeave.push([name, latF, lngF]);
 				{% endfor %}
 			{% else %}
 			{% endif %}
 
 			{% if old_leave_list %}
-				{% for construction in old_working_list %}
-				var name = '{{ construction.name }}';
-				var latF = parseFloat({{ construction.latitude }});
-				var lngF = parseFloat({{ construction.longitude }});
+				{% for constructionL in old_working_list %}
+				var name = '{{ constructionL.name }}';
+				var latF = parseFloat({{ constructionL.latitude }});
+				var lngF = parseFloat({{ constructionL.longitude }});
 				pinLeave.push([name, latF, lngF]);
 				{% endfor %}
 			{% else %}
@@ -133,6 +133,7 @@
 			for (i = 0; i < pinWorking.length; i++) {  
 			  marker = new google.maps.Marker({
 				position: new google.maps.LatLng(pinWorking[i][1], pinWorking[i][2]),
+				map: map,
 				icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
 			  });
 			  console.log(pinWorking[i][0])
@@ -151,6 +152,10 @@
 				position: new google.maps.LatLng(pinFinish[i][1], pinFinish[i][2]),
 				icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
 			  });
+
+			  console.log(pinFinish[i][0])
+			  console.log(pinFinish[i][1])
+			  console.log(pinFinish[i][2])
 			  google.maps.event.addListener(markerF, 'click', (function(markerF, i) {
 				return function() {
 				  infowindow.setContent(pinFinish[i][0]);
@@ -172,6 +177,10 @@
 			}
 
 			var markerCluster = new MarkerClusterer(map, marker,
+			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+			var markerClusterF = new MarkerClusterer(map, markerF,
+			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+			var markerClusterL = new MarkerClusterer(map, markerL,
 			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 		}
 	</script>

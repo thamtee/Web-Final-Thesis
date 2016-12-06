@@ -85,7 +85,7 @@
 			{% endif %}
 
 			{% if report_finish_list %}
-				{% for constructionF in report_working_list %}
+				{% for constructionF in report_finish_list %}
 				var name = '{{ constructionF.name }}';
 				var latF = parseFloat({{ constructionF.latitude }});
 				var lngF = parseFloat({{ constructionF.longitude }});
@@ -96,7 +96,7 @@
 			{% endif %}
 
 			{% if old_finish_list %}
-				{% for constructionF in old_working_list %}
+				{% for constructionF in old_finish_list %}
 				var name = '{{ constructionF.name }}';
 				var latF = parseFloat({{ constructionF.latitude }});
 				var lngF = parseFloat({{ constructionF.longitude }});
@@ -107,7 +107,7 @@
 			{% endif %}
 
 			{% if report_leave_list %}
-				{% for constructionL in report_working_list %}
+				{% for constructionL in report_leave_list %}
 				var name = '{{ constructionL.name }}';
 				var latF = parseFloat({{ constructionL.latitude }});
 				var lngF = parseFloat({{ constructionL.longitude }});
@@ -118,7 +118,7 @@
 			{% endif %}
 
 			{% if old_leave_list %}
-				{% for constructionL in old_working_list %}
+				{% for constructionL in old_leave_list %}
 				var name = '{{ constructionL.name }}';
 				var latF = parseFloat({{ constructionL.latitude }});
 				var lngF = parseFloat({{ constructionL.longitude }});

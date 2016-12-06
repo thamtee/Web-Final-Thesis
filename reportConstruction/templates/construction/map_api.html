@@ -154,43 +154,6 @@
 				}
 			  })(marker, i));
 			}
-
-			// for (i = 0; i < pinWorking.length; i++) {  
-			//   markerj = new google.maps.Marker({
-			// 	position: new google.maps.LatLng(pinWorking[i][1], pinWorking[i][2]),
-			// 	map: map,
-			// 	icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-			//   });
-			//   console.log(pinWorking[i][0])
-			//   console.log(pinWorking[i][1])
-			//   console.log(pinWorking[i][2])
-
-			//   google.maps.event.addListener(markerj, 'click', (function(markerj, i) {
-			// 	return function() {
-			// 	  infowindow.setContent(pinWorking[i][0]);
-			// 	  infowindow.open(map, markerj);
-			// 	}
-			//   })(markerj, i));
-			// }
-			
-			// for (i = 0; i < pinLeave.length; i++) {  
-			//   markerk = new google.maps.Marker({
-			// 	position: new google.maps.LatLng(pinLeave[i][1], pinLeave[i][2]),
-			// 	map: map,
-			// 	icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-			//   });
-
-			//   console.log(pinLeave[i][0])
-			//   console.log(pinLeave[i][1])
-			//   console.log(pinLeave[i][2])
-			//   google.maps.event.addListener(markerk, 'click', (function(markerk, i) {
-			// 	return function() {
-			// 	  infowindow.setContent(pinLeave[i][0]);
-			// 	  infowindow.open(map, markerk);
-			// 	}
-			//   })(markerk, i));
-			// }
-
 			var markerCluster = new MarkerClusterer(map, marker,
 			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 		}

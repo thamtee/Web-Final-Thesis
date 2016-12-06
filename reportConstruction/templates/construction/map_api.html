@@ -36,15 +36,15 @@
 				<a class="navbar-form navbar-nav" href="#">
 					<img alt="Brand" src="http://maps.google.com/mapfiles/ms/icons/red-dot.png">
 				</a>
-			  <p class="navbar-text">Signed in as Mark Otto</p>
+			  <p class="navbar-text">สถานะละทิ้งงานก้อสร้าง</p>
 			  	<a class="navbar-form navbar-nav" href="#">
 			  		<img alt="Brand" src="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png">
 			  	</a>
-			  <p class="navbar-text">Signed in as Mark Otto</p>
+			  <p class="navbar-text">สถานะกำลังดำเนินงาน</p>
 			  	<a class="navbar-form navbar-nav" href="#">
 			  		<img alt="Brand" src="http://maps.google.com/mapfiles/ms/icons/green-dot.png">
 			  	</a>
-			  <p class="navbar-text">Signed in as Mark Otto</p>
+			  <p class="navbar-text">สถานะเสร็จสิ้นการดำเนินงาน</p>
 		  </div>
 		  <ul class="nav navbar-nav navbar-right">
 			  <a class="navbar-brand" href = "admin">Sign in</a>
@@ -56,47 +56,82 @@
 		var map;
 		function initMap() {
 			var nu = {lat: 16.7423, lng: 100.193};
-			var	pin = [];
-			var	marker = [];
-			var	latitudeList = [];
-			var	longitudeList = [];
+			var	pinWorking = [];
+			var pinFinish = [];
+			var pinLeave = [];
+			var markerFinish = [];
+			var markerLeave =[];
 			var	labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 			{% if report_construction_list %}
-				{% for construction in report_construction_list %}
-					latitudeList.push({{ construction.latitude }});
-					longitudeList.push({{ construction.longitude }});
+				{% for construction in report_working_list %}
+				pinWorking.push({lat: parseFloat({{ construction.latitude }}), lng: parseFloat({{ construction.longitude }})});
 				{% endfor %}
 			{% else %}
 			{% endif %}
 
 			{% if old_construction_list %}
-				{% for construction in old_construction_list %}
-					latitudeList.push({{ construction.latitude }});
-					longitudeList.push({{ construction.longitude }});
+				{% for construction in old_working_list %}
+				pinWorking.push({lat: parseFloat({{ construction.latitude }}), lng: parseFloat({{ construction.longitude }})});
 				{% endfor %}
 			{% else %}
 			{% endif %}
 
-			for (var i = 0; i<latitudeList.length; ++i){
-				pin.push({lat: parseFloat(latitudeList[i]), lng: parseFloat(longitudeList[i])});
-				console.log(parseFloat(latitudeList[i]));
-				console.log(parseFloat(longitudeList[i]));
-			}
-			console.log(pin);
+			{% if report_finish_list %}
+				{% for construction in report_working_list %}
+				pinFinish.push({lat: parseFloat({{ construction.latitude }}), lng: parseFloat({{ construction.longitude }})});
+				{% endfor %}
+			{% else %}
+			{% endif %}
+
+			{% if old_finish_list %}
+				{% for construction in old_working_list %}
+				pinFinish.push({lat: parseFloat({{ construction.latitude }}), lng: parseFloat({{ construction.longitude }})});
+				{% endfor %}
+			{% else %}
+			{% endif %}
+
+			{% if report_leave_list %}
+				{% for construction in report_working_list %}
+				pinLeave.push({lat: parseFloat({{ construction.latitude }}), lng: parseFloat({{ construction.longitude }})});
+				{% endfor %}
+			{% else %}
+			{% endif %}
+
+			{% if old_leave_list %}
+				{% for construction in old_working_list %}
+				pinLeave.push({lat: parseFloat({{ construction.latitude }}), lng: parseFloat({{ construction.longitude }})});
+				{% endfor %}
+			{% else %}
+			{% endif %}
+
 			map = new google.maps.Map(document.getElementById('map'), {
 				center: nu,
 				zoom: 10
 			});
 
-			var markers = pin.map(function(location, i) {
+			var markerWorking = pinWorking.map(function(location, i) {
 				console.log(location);
 				return new google.maps.Marker({
 					position: location,
 					icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
 				});
 			});
-			var markerCluster = new MarkerClusterer(map, markers,
+			var markerFinish = pinFinish.map(function(location, i) {
+				console.log(location);
+				return new google.maps.Marker({
+					position: location,
+					icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+				});
+			});
+			var markerLeave = pinLeave.map(function(location, i) {
+				console.log(location);
+				return new google.maps.Marker({
+					position: location,
+					icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+				});
+			});
+			var markerCluster = new MarkerClusterer(map, markerWorking,
 			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 		}
 	</script>

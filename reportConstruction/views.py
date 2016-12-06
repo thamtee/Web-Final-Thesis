@@ -41,9 +41,22 @@ def map_api(request):
 	report_construction_list = ReportConstruction.objects.filter(viewMap = True)
 	old_construction_list = OldConstruction.objects.filter(viewMap = True)
 
+	report_working_list = report_construction_list.objects.filter(status_construction = "W")
+	old_working_list = old_construction_list.objects.filter(status_construction = "W")
+
+	report_finish_list = report_construction_list.objects.filter(status_construction = "F")
+	old_finish_list = old_construction_list.objects.filter(status_construction = "F")
+
+	report_leave_list = report_construction_list.objects.filter(status_construction = "L")
+	old_leave_list = old_construction_list.objects.filter(status_construction = "L")
+
 	context = {
-				'report_construction_list': report_construction_list,
-				'old_construction_list': old_construction_list
+				'report_working_list': report_working_list,
+				'old_working_list': old_working_list,
+				'report_finish_list': report_finish_list,
+				'old_finish_list': old_finish_list,
+				'report_leave_list': report_leave_list,
+				'old_leave_list': old_leave_list
 				}
 
 	return render(request, 'construction/map_api.html', context)

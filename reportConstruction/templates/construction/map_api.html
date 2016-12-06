@@ -59,6 +59,7 @@
 			var	pinWorking = [];
 			var pinFinish = [];
 			var pinLeave = [];
+			var pinT = [];
 			var	labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 			{% if report_working_list %}
@@ -66,7 +67,8 @@
 				var name = '{{ construction.name }}';
 				var latF = parseFloat({{ construction.latitude }});
 				var lngF = parseFloat({{ construction.longitude }});
-				pinWorking.push([name, latF, lngF]);
+				var pin = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+				pinT.push([name, latF, lngF, pin]);
 				{% endfor %}
 			{% else %}
 			{% endif %}
@@ -76,7 +78,8 @@
 				var name = '{{ construction.name }}';
 				var latF = parseFloat({{ construction.latitude }});
 				var lngF = parseFloat({{ construction.longitude }});
-				pinWorking.push([name, latF, lngF]);
+				var pin = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+				pinT.push([name, latF, lngF, pin]);
 				{% endfor %}
 			{% else %}
 			{% endif %}
@@ -86,7 +89,8 @@
 				var name = '{{ constructionF.name }}';
 				var latF = parseFloat({{ constructionF.latitude }});
 				var lngF = parseFloat({{ constructionF.longitude }});
-				pinFinish.push([name, latF, lngF]);
+				var pin = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+				pinT.push([name, latF, lngF, pin]);
 				{% endfor %}
 			{% else %}
 			{% endif %}
@@ -96,7 +100,8 @@
 				var name = '{{ constructionF.name }}';
 				var latF = parseFloat({{ constructionF.latitude }});
 				var lngF = parseFloat({{ constructionF.longitude }});
-				pinFinish.push([name, latF, lngF]);
+				var pin = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+				pinT.push([name, latF, lngF, pin]);
 				{% endfor %}
 			{% else %}
 			{% endif %}
@@ -106,7 +111,8 @@
 				var name = '{{ constructionL.name }}';
 				var latF = parseFloat({{ constructionL.latitude }});
 				var lngF = parseFloat({{ constructionL.longitude }});
-				pinLeave.push([name, latF, lngF]);
+				var pin = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+				pinT.push([name, latF, lngF, pin]);
 				{% endfor %}
 			{% else %}
 			{% endif %}
@@ -116,7 +122,8 @@
 				var name = '{{ constructionL.name }}';
 				var latF = parseFloat({{ constructionL.latitude }});
 				var lngF = parseFloat({{ constructionL.longitude }});
-				pinLeave.push([name, latF, lngF]);
+				var pin = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+				pinT.push([name, latF, lngF, pin]);
 				{% endfor %}
 			{% else %}
 			{% endif %}
@@ -129,66 +136,67 @@
 			var marker, i, markerj, markerk;
 
 			var infowindow = new google.maps.InfoWindow();
-			for (i = 0; i < pinFinish.length; i++) {  
+			for (i = 0; i < pinT.length; i++) {  
 			  marker = new google.maps.Marker({
-				position: new google.maps.LatLng(pinFinish[i][1], pinFinish[i][2]),
+				position: new google.maps.LatLng(pinT[i][1], pinT[i][2]),
 				map: map,
-				icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+				icon: pinT[i][3]
 			  });
 
-			  console.log(pinFinish[i][0])
-			  console.log(pinFinish[i][1])
-			  console.log(pinFinish[i][2])
+			  console.log(pinT[i][0])
+			  console.log(pinT[i][1])
+			  console.log(pinT[i][2])
+			  console.log(pinT[i][3])
 			  google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {
-				  infowindow.setContent(pinFinish[i][0]);
+				  infowindow.setContent(pinT[i][0]);
 				  infowindow.open(map, marker);
 				}
 			  })(marker, i));
 			}
 
-			for (i = 0; i < pinWorking.length; i++) {  
-			  markerj = new google.maps.Marker({
-				position: new google.maps.LatLng(pinWorking[i][1], pinWorking[i][2]),
-				map: map,
-				icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-			  });
-			  console.log(pinWorking[i][0])
-			  console.log(pinWorking[i][1])
-			  console.log(pinWorking[i][2])
+			// for (i = 0; i < pinWorking.length; i++) {  
+			//   markerj = new google.maps.Marker({
+			// 	position: new google.maps.LatLng(pinWorking[i][1], pinWorking[i][2]),
+			// 	map: map,
+			// 	icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+			//   });
+			//   console.log(pinWorking[i][0])
+			//   console.log(pinWorking[i][1])
+			//   console.log(pinWorking[i][2])
 
-			  google.maps.event.addListener(markerj, 'click', (function(markerj, i) {
-				return function() {
-				  infowindow.setContent(pinWorking[i][0]);
-				  infowindow.open(map, markerj);
-				}
-			  })(markerj, i));
-			}
+			//   google.maps.event.addListener(markerj, 'click', (function(markerj, i) {
+			// 	return function() {
+			// 	  infowindow.setContent(pinWorking[i][0]);
+			// 	  infowindow.open(map, markerj);
+			// 	}
+			//   })(markerj, i));
+			// }
 			
-			for (i = 0; i < pinLeave.length; i++) {  
-			  markerk = new google.maps.Marker({
-				position: new google.maps.LatLng(pinLeave[i][1], pinLeave[i][2]),
-				map: map,
-				icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-			  });
+			// for (i = 0; i < pinLeave.length; i++) {  
+			//   markerk = new google.maps.Marker({
+			// 	position: new google.maps.LatLng(pinLeave[i][1], pinLeave[i][2]),
+			// 	map: map,
+			// 	icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+			//   });
 
-			  console.log(pinLeave[i][0])
-			  console.log(pinLeave[i][1])
-			  console.log(pinLeave[i][2])
-			  google.maps.event.addListener(markerk, 'click', (function(markerk, i) {
-				return function() {
-				  infowindow.setContent(pinLeave[i][0]);
-				  infowindow.open(map, markerk);
-				}
-			  })(markerk, i));
-			}
+			//   console.log(pinLeave[i][0])
+			//   console.log(pinLeave[i][1])
+			//   console.log(pinLeave[i][2])
+			//   google.maps.event.addListener(markerk, 'click', (function(markerk, i) {
+			// 	return function() {
+			// 	  infowindow.setContent(pinLeave[i][0]);
+			// 	  infowindow.open(map, markerk);
+			// 	}
+			//   })(markerk, i));
+			// }
 
 			var markerCluster = new MarkerClusterer(map, marker,
 			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-			var markerClusterj = new MarkerClusterer(map, markerj,
-			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-			var markerClusterk = new MarkerClusterer(map, markerk,
-			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+			// var markerClusterj = new MarkerClusterer(map, markerj,
+			// {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+			// var markerClusterk = new MarkerClusterer(map, markerk,
+			// {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 		}
 	</script>
 	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">

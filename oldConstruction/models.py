@@ -2,6 +2,14 @@ from django.db import models
 
 
 class OldConstruction(models.Model):
+
+	STATUS = (
+				('W', 'Working'),
+				('F', 'Finish'),
+				('L', 'Leave'),
+				('U', 'Unknown'),
+			 )
+
 	create = models.DateTimeField(auto_now_add=True)
 	name = models.CharField(max_length=30, default='')
 	companyName = models.CharField(max_length=50, default='')
@@ -25,6 +33,8 @@ class OldConstruction(models.Model):
 
 	latitude = models.FloatField(default=0)
 	longitude = models.FloatField(default=0)
+
+	status = models.CharField(max_length=1, choices=STATUS, default='U')
 
 	class Meta:
 		ordering = ('create',)

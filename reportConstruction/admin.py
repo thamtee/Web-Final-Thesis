@@ -6,17 +6,18 @@ from oldConstruction.models import OldConstruction
 # Register your models here.
 
 class ReportAdmin(admin.ModelAdmin):
-	fields = ('name', 'endDate', 'viewMap')
+	fields = ('name', 'endDate', 'viewMap', 'status',)
 
 	ordering = ('create', )
 
-	list_display = ('create', 'name', 'endDate', 'viewMap',)
-	list_display_links = ('name', 'endDate', 'viewMap',)
+	list_display = ('create', 'name', 'endDate', 'viewMap', 'status',)
+	list_display_links = ('name', 'endDate', 'viewMap', 'status',)
 
 	list_filter = (
 					'endDate',
 					'name', 
-					('viewMap', admin.BooleanFieldListFilter),
+					'viewMap',
+					'status',
 					)
 
 	empty_value_display = 'unknown'

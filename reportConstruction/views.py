@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.db.models import Q
 
 from .models import ReportConstruction
 from oldConstruction.models import OldConstruction
@@ -41,14 +42,14 @@ def map_api(request):
 	report_construction_list = ReportConstruction.objects.filter(viewMap = True)
 	old_construction_list = OldConstruction.objects.filter(viewMap = True)
 
-	report_working_list = report_construction_list.objects.filter(status_construction = "W")
-	old_working_list = old_construction_list.objects.filter(status_construction = "W")
+	report_working_list = ReportConstruction.objects.filter(status_construction = 'W', viewMap = True)
+	old_working_list = OldConstruction.objects.filter(status_construction = 'W', viewMap = True)
 
-	report_finish_list = report_construction_list.objects.filter(status_construction = "F")
-	old_finish_list = old_construction_list.objects.filter(status_construction = "F")
+	report_finish_list = ReportConstruction.objects.filter(status_construction = 'F', viewMap = True)
+	old_finish_list = OldConstruction.objects.filter(status_construction = 'F', viewMap = True)
 
-	report_leave_list = report_construction_list.objects.filter(status_construction = "L")
-	old_leave_list = old_construction_list.objects.filter(status_construction = "L")
+	report_leave_list = ReportConstruction.objects.filter(status_construction = 'L', viewMap = True)
+	old_leave_list = OldConstruction.objects.filter(status_construction = 'L', viewMap = True)
 
 	context = {
 				'report_working_list': report_working_list,

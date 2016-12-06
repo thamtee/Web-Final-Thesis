@@ -128,6 +128,8 @@
 
 			var marker, i;
 
+			var infowindow = new google.maps.InfoWindow();
+
 			for (i = 0; i < pinWorking.length; i++) {  
 			  marker = new google.maps.Marker({
 				position: new google.maps.LatLng(pinWorking[i][1], pinWorking[i][2]),
